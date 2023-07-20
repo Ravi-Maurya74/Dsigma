@@ -1,4 +1,6 @@
+import 'package:dsigma/pages/home_page.dart';
 import 'package:dsigma/pages/walkthrough_page.dart';
+import 'package:dsigma/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -27,12 +29,21 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => WalkThroughScreen(),
-            ),
-            (route) => false);
+        if (Auth().currentUser != null) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+              (route) => false);
+        } else {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WalkThroughScreen(),
+              ),
+              (route) => false);
+        }
       },
     );
   }

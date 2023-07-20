@@ -1,11 +1,11 @@
 import 'package:dsigma/pages/home_page.dart';
-import 'package:dsigma/pages/register.dart';
+import 'package:dsigma/pages/login.dart';
 import 'package:dsigma/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class Login extends StatelessWidget {
   Future<void> registerUser(BuildContext context) async {
     FocusManager.instance.primaryFocus!.unfocus();
     try {
-      await Auth().signInWithEmailAndPassword(
+      await Auth().createUserWithEmailAndPassword(
           email: _emailController.text, password: _passwordController.text);
       if (!context.mounted) return;
       Navigator.pushAndRemoveUntil(
@@ -71,7 +71,7 @@ class Login extends StatelessWidget {
           Row(
             children: [
               Text(
-                "Login",
+                "Register",
                 style: Theme.of(context).textTheme.titleLarge,
               )
             ],
@@ -83,23 +83,27 @@ class Login extends StatelessWidget {
             label: "Enter your email",
             controller: _emailController,
           ),
-          MyTextField(label: "Enter password", controller: _passwordController,obscure: true,),
+          MyTextField(
+            label: "Enter password",
+            controller: _passwordController,
+            obscure: true,
+          ),
           ContinueButton(
             callback: registerUser,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("New User?"),
+              const Text("Existing User?"),
               TextButton(
                 onPressed: () {
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RegisterPage(),
+                        builder: (context) => const LoginPage(),
                       ));
                 },
-                child: const Text("Register"),
+                child: const Text("Login"),
               ),
             ],
           ),
@@ -168,7 +172,7 @@ class MyTextField extends StatelessWidget {
     super.key,
     required this.label,
     required this.controller,
-     this.obscure=false,
+    this.obscure = false,
   });
   final String label;
   final TextEditingController controller;

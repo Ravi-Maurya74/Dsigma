@@ -1,4 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dsigma/pages/login.dart';
+import 'package:dsigma/services/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -831,9 +834,38 @@ class Header extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Hi Monica",
-          style: Theme.of(context).textTheme.headlineMedium,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Hi Monica",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const Spacer(),
+            TextButton(
+              onPressed: () async {
+                try {
+                  await Auth().signOut();
+                  if (!context.mounted) return;
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                      (route) => false);
+                } on FirebaseAuthException catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(e.message ?? ""),
+                      duration: const Duration(
+                          seconds: 8), // Adjust the duration as needed
+                    ),
+                  );
+                }
+              },
+              child: const Text("Log Out"),
+            ),
+          ],
         ),
         const SizedBox(
           height: 10,

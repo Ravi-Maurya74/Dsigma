@@ -114,6 +114,7 @@ class _BottomButtonState extends State<BottomButton> {
         Future.delayed(
           const Duration(seconds: 1),
           () {
+            if (!mounted) return;
             setState(() {
               _text = true;
             });
