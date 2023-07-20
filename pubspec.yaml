@@ -41,6 +41,7 @@ dependencies:
   matrix4_transform: ^2.0.1
   firebase_core: ^2.15.0
   firebase_auth: ^4.7.1
+  sticky_headers: ^0.3.0+2
 
 dev_dependencies:
   flutter_test:

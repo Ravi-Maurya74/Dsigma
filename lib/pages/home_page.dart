@@ -3,6 +3,7 @@ import 'package:dsigma/pages/login.dart';
 import 'package:dsigma/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -24,18 +25,16 @@ class HomePage extends StatelessWidget {
                   height: 20,
                 ),
                 ImageCardRow(),
-                SizedBox(
-                  height: 20,
-                ),
-                SearchBar(),
-                SizedBox(
-                  height: 40,
-                ),
-                MiddleSection(),
-                TopCategories(),
-                FoodSection(),
-                Services(),
-                EndText()
+                StickyHeaderContent(),
+                // SearchBar(),
+                // SizedBox(
+                //   height: 40,
+                // ),
+                // MiddleSection(),
+                // TopCategories(),
+                // FoodSection(),
+                // Services(),
+                // EndText()
               ],
             ),
           ),
@@ -48,6 +47,27 @@ class HomePage extends StatelessWidget {
   }
 }
 
+class StickyHeaderContent extends StatelessWidget {
+  const StickyHeaderContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StickyHeader(
+      header: const SearchBar(),
+      content: const Column(
+        children: [
+          // SearchBar(),
+          MiddleSection(),
+          TopCategories(),
+          FoodSection(),
+          Services(),
+          EndText()
+        ],
+      ),
+    );
+  }
+}
+
 class FAB extends StatelessWidget {
   const FAB({
     super.key,
@@ -56,13 +76,23 @@ class FAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      clipBehavior: Clip.antiAlias,
+      // clipBehavior: Clip.antiAlias,
       onPressed: null,
       shape: const CircleBorder(),
       child: Container(
-        color: Colors.deepPurple,
+        decoration: BoxDecoration(
+          color: Colors.deepPurple,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(
+            color: Colors.amber, // You can set the border color here.
+            width: 2.0, // You can set the border width here.
+          ),
+        ),
+        padding: const EdgeInsets.all(8),
         width: double.infinity,
-        child: const Image(image: AssetImage("assets/icons/logo.png")),
+        child: const Image(
+          image: AssetImage("assets/icons/logo.png"),
+        ),
       ),
     );
   }
@@ -81,7 +111,7 @@ class CustomBottomAppBar extends StatelessWidget {
       elevation: 5,
       shape: CircularNotchedRectangle(),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Icon(
             Icons.home,
@@ -91,6 +121,9 @@ class CustomBottomAppBar extends StatelessWidget {
           Icon(
             Icons.favorite_border,
             size: 30,
+          ),
+          SizedBox(
+            width: 20,
           ),
           Icon(
             Icons.food_bank_outlined,
@@ -335,7 +368,10 @@ class TopCategories extends StatelessWidget {
       children: [
         Text(
           "Top Categories",
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(fontWeight: FontWeight.w400),
         ),
         const SizedBox(
           height: 10,
@@ -540,7 +576,10 @@ class MiddleSection extends StatelessWidget {
       children: [
         Text(
           "Start crafting",
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(fontWeight: FontWeight.w400),
         ),
         SizedBox(
           height: 180,
@@ -676,7 +715,12 @@ class AnotherCraftingCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Text("Starts at \$777"),
+                  Text(
+                    "Starts at \$777",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: const Color(0xFF6318AF),
+                        fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),
@@ -733,7 +777,13 @@ class CraftingCard extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(title),
+                  child: Text(
+                    title,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ],
             ),
@@ -750,24 +800,33 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: const Offset(0, 3),
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: const Offset(0, 3),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: const TextField(
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(10),
-          suffixIcon: Icon(Icons.search),
-          hintText: 'Search food or events',
-          border: InputBorder.none,
+          child: const TextField(
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.all(10),
+              suffixIcon: Icon(
+                Icons.search,
+                color: Color(0xFF6318AF),
+              ),
+              hintText: 'Search food or events',
+              border: InputBorder.none,
+            ),
+          ),
         ),
       ),
     );
@@ -838,8 +897,11 @@ class Header extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hi Monica",
-              style: Theme.of(context).textTheme.headlineMedium,
+              "Hi, Monica!",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(color: const Color(0xFF6318AF)),
             ),
             const Spacer(),
             TextButton(
@@ -850,7 +912,7 @@ class Header extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => const LoginPage(),
                       ),
                       (route) => false);
                 } on FirebaseAuthException catch (e) {
@@ -878,7 +940,10 @@ class Header extends StatelessWidget {
                 Text("Current location"),
                 Row(
                   children: [
-                    Icon(Icons.location_on_outlined),
+                    Icon(
+                      Icons.location_on_outlined,
+                      color: Color(0xFF6318AF),
+                    ),
                     Text("Hyderabad"),
                   ],
                 ),
@@ -886,7 +951,13 @@ class Header extends StatelessWidget {
             ),
             Spacer(),
             Column(
-              children: [Icon(Icons.play_circle_fill), Text("How it works?")],
+              children: [
+                Icon(
+                  Icons.play_circle_outline,
+                  color: Color(0xFF6318AF),
+                ),
+                Text("How it works?")
+              ],
             )
           ],
         )
