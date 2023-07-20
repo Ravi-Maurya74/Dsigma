@@ -1,3 +1,4 @@
+import 'package:dsigma/pages/home_page.dart';
 import 'package:dsigma/pages/tab1.dart';
 import 'package:dsigma/pages/tab2.dart';
 import 'package:dsigma/pages/tab3.dart';
@@ -132,6 +133,14 @@ class _BottomButtonState extends State<BottomButton> {
     return GestureDetector(
       onTap: () {
         HapticFeedback.vibrate();
+        if (widget.controller.page == 2) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+              (route) => false);
+        }
         widget.controller.nextPage(
             duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
       },
