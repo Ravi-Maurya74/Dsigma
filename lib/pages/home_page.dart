@@ -3,6 +3,7 @@ import 'package:dsigma/pages/login.dart';
 import 'package:dsigma/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
 class HomePage extends StatelessWidget {
@@ -61,9 +62,207 @@ class StickyHeaderContent extends StatelessWidget {
           TopCategories(),
           FoodSection(),
           Services(),
-          EndText()
+          Work(),
+          EndText(),
         ],
       ),
+    );
+  }
+}
+
+class Work extends StatelessWidget {
+  const Work({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "How does it work?",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const WorkRowLeft(
+          path: "assets/images/homegirl1.png",
+          title: "Customize Menu",
+          text: "Select items for a single event or multiple events",
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const WorkRowRight(
+          path: "assets/images/homegirl2.png",
+          title: "Choose Services",
+          text:
+              "Select the type of services from varying cutlery, mode of serving options, & more",
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const WorkRowLeft(
+            path: "assets/images/homepiggybank.png",
+            title: "Dynamic Pricing",
+            text:
+                "Price per plate varies with no. of items in a plate and no. of plates selected"),
+        const SizedBox(
+          height: 20,
+        ),
+        const WorkRowRight(
+          path: "assets/images/homegirl3.png",
+          title: "Track Your Order",
+          text:
+              "Track the order status and seek help from the executives anytime",
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const WorkRowLeft(
+          path: "assets/images/homegirl4.png",
+          title: "Taste Your Samples",
+          text:
+              "Explode your taste buds with samples of what you order(on request for eligible orders)",
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const WorkRowRight(
+          path: "assets/images/homecouple.png",
+          title: "Enjoy Food and Services",
+          text: "Enjoy event with delicious and customized foods",
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+      ],
+    );
+  }
+}
+
+class WorkRowLeft extends StatelessWidget {
+  const WorkRowLeft({
+    super.key,
+    required this.path,
+    required this.title,
+    required this.text,
+  });
+  final String path, title, text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Flexible(
+          flex: 4,
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: RadialGradient(colors: [
+                    Colors.amber[300]!.withOpacity(0.4),
+                    Colors.amber[300]!.withOpacity(0.2),
+                    Colors.amber[300]!.withOpacity(0),
+                  ]),
+                ),
+                height: 120,
+              ),
+              Image(
+                height: 120,
+                image: AssetImage(path),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Flexible(
+          flex: 6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(color: const Color(0xFF6318AF)),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(text),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class WorkRowRight extends StatelessWidget {
+  const WorkRowRight({
+    super.key,
+    required this.path,
+    required this.title,
+    required this.text,
+  });
+  final String path, title, text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Flexible(
+          flex: 6,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge!
+                    .copyWith(color: const Color(0xFF6318AF)),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              Text(text),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Flexible(
+          flex: 4,
+          child: Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: RadialGradient(colors: [
+                    Colors.amber[300]!.withOpacity(0.4),
+                    Colors.amber[300]!.withOpacity(0.2),
+                    Colors.amber[300]!.withOpacity(0),
+                  ]),
+                ),
+                height: 120,
+              ),
+              Image(
+                height: 120,
+                image: AssetImage(path),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -159,7 +358,24 @@ class EndText extends StatelessWidget {
         ),
         const SizedBox(
           height: 80,
-        )
+        ),
+        // SizedBox(
+        //   height: 200,
+        //   child: Shimmer.fromColors(
+        //     baseColor:
+        //         Colors.grey[300]!, // Starting color of the shimmer effect
+        //     highlightColor:
+        //         Colors.grey[100]!, // Ending color of the shimmer effect
+        //     child: Container(
+        //       width: double.infinity,
+        //       height: double.infinity,
+        //       decoration: BoxDecoration(
+        //         color: Colors.white,
+        //         borderRadius: BorderRadius.circular(8.0),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
@@ -179,9 +395,9 @@ class Services extends StatelessWidget {
           "Services",
           style: Theme.of(context).textTheme.titleLarge,
         ),
-        const SizedBox(
-          height: 20,
-        ),
+        // const SizedBox(
+        //   height: 20,
+        // ),
         SizedBox(
           height: 370,
           child: ListView(
@@ -228,7 +444,10 @@ class Services extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
+        const SizedBox(
+          height: 30,
+        ),
       ],
     );
   }
@@ -516,6 +735,9 @@ class FoodSection extends StatelessWidget {
                       "https://images.saymedia-content.com/.image/c_limit%2Ccs_srgb%2Cq_auto:eco%2Cw_760/MTk2OTUxMTk0MTkzNjM1MDc3/kebabs.webp"),
             ],
           ),
+        ),
+        const SizedBox(
+          height: 20,
         ),
       ],
     );
@@ -872,13 +1094,29 @@ class ImageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
-      child: Container(
+      child: SizedBox(
         height: 150,
         width: 300,
-        color: Colors.blue[100],
+        // color: Colors.blue[100],
         child: CachedNetworkImage(
           imageUrl: url,
           fit: BoxFit.cover,
+          placeholder: (context, url) {
+            return Shimmer.fromColors(
+              baseColor:
+                  Colors.grey[300]!, // Starting color of the shimmer effect
+              highlightColor:
+                  Colors.grey[100]!, // Ending color of the shimmer effect
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
