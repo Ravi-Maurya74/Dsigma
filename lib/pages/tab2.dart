@@ -8,81 +8,83 @@ class Tab2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Stack(
-            children: [
-              const AnimatedGamla(),
-              Container(
-                height: 300,
-                width: 300,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/bhooki aurat.png'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Stack(
+              children: [
+                const AnimatedGamla(),
+                Container(
+                  height: 300,
+                  width: 300,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/bhooki aurat.png'),
+                    ),
                   ),
                 ),
-              ),
-              const AnimatedFoodLeft(
-                  path: "assets/food/sandwich.png",
-                  topStart: 100,
-                  topEnd: 130,
-                  leftStart: 70,
-                  leftEnd: 50),
-              const AnimatedFoodLeft(
-                  path: "assets/food/donut.png",
-                  topStart: 60,
-                  topEnd: 70,
-                  leftStart: 50,
-                  leftEnd: 10),
-              const AnimatedFoodLeft(
-                  path: "assets/food/burger.png",
-                  topStart: 15,
-                  topEnd: 0,
-                  leftStart: 80,
-                  leftEnd: 50),
-              const AnimatedFoodRight(
-                  path: "assets/food/salad.png",
-                  topStart: 15,
-                  topEnd: 0,
-                  rightStart: 80,
-                  rightEnd: 50),
-              const AnimatedFoodRight(
-                  path: "assets/food/aple.png",
-                  topStart: 60,
-                  topEnd: 70,
-                  rightStart: 50,
-                  rightEnd: 10),
-              const AnimatedFoodRight(
-                  path: "assets/food/fish.png",
-                  topStart: 100,
-                  topEnd: 130,
-                  rightStart: 70,
-                  rightEnd: 50),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Exquisite Catering',
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(fontWeight: FontWeight.w500, fontSize: 27),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Experience culinary artistry like never before with our innovating and exquisite cusin creations.',
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-        ],
+                const AnimatedFoodLeft(
+                    path: "assets/food/sandwich.png",
+                    topStart: 100,
+                    topEnd: 130,
+                    leftStart: 70,
+                    leftEnd: 50),
+                const AnimatedFoodLeft(
+                    path: "assets/food/donut.png",
+                    topStart: 60,
+                    topEnd: 70,
+                    leftStart: 50,
+                    leftEnd: 10),
+                const AnimatedFoodLeft(
+                    path: "assets/food/burger.png",
+                    topStart: 15,
+                    topEnd: 0,
+                    leftStart: 80,
+                    leftEnd: 50),
+                const AnimatedFoodRight(
+                    path: "assets/food/salad.png",
+                    topStart: 15,
+                    topEnd: 0,
+                    rightStart: 80,
+                    rightEnd: 50),
+                const AnimatedFoodRight(
+                    path: "assets/food/aple.png",
+                    topStart: 60,
+                    topEnd: 70,
+                    rightStart: 50,
+                    rightEnd: 10),
+                const AnimatedFoodRight(
+                    path: "assets/food/fish.png",
+                    topStart: 100,
+                    topEnd: 130,
+                    rightStart: 70,
+                    rightEnd: 50),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Exquisite Catering',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(fontWeight: FontWeight.w500, fontSize: 27),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Experience culinary artistry like never before with our innovating and exquisite cusin creations.',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
